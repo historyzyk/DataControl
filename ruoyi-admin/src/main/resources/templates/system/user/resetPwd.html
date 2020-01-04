@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: header">
+	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+</head>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-user-resetPwd">
@@ -15,7 +17,8 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">输入密码：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="password" name="password" id="password" th:value="${@config.getKey('sys.user.initPassword')}">
+					<input class="form-control" type="password" name="password" id="password" th:value="${@config.getKey('sys.user.initPassword')}" required>
+					<i class="fa fa-eye" onclick="showhide()" id="eye"></i>
 				</div>
 			</div>
 		</form>
@@ -25,7 +28,6 @@
 		$("#form-user-resetPwd").validate({
 			rules:{
 				password:{
-					required:true,
 					minlength: 5,
 					maxlength: 20
 				},
@@ -37,6 +39,19 @@
 	        	$.operate.save(ctx + "system/user/resetPwd", $('#form-user-resetPwd').serialize());
 	        }
 	    }
+
+		var eye = document.getElementById("eye");
+		var pwd = document.getElementById("password");
+		function showhide(){
+
+			if (pwd.type == "password") {
+				pwd.type = "text";
+				eye.className='fa fa-eye-slash'
+			}else {
+				pwd.type = "password";
+				eye.className='fa fa-eye'
+			}
+		}
 	</script>
 </body>
 

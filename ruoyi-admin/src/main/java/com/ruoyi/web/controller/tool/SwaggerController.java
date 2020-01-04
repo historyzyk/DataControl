@@ -12,6 +12,18 @@ import com.ruoyi.framework.web.base.BaseController;
  * @author ruoyi
  */
 @Controller
+@RequestMapping("/system/mobile")
+public class SwaggerController extends BaseController
+{
+    @RequiresPermissions("system:mobile:view")
+    @GetMapping()
+    public String index()
+    {
+        return redirect("/swagger-ui.html");
+    }
+}
+/*
+@Controller
 @RequestMapping("/tool/swagger")
 public class SwaggerController extends BaseController
 {
@@ -21,4 +33,4 @@ public class SwaggerController extends BaseController
     {
         return redirect("/swagger-ui.html");
     }
-}
+}*/

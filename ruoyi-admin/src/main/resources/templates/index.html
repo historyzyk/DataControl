@@ -98,11 +98,69 @@
                     <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li><a title="小组项目" href="https://github.com/historyzyk/DataControl" target="_blank"><i class="fa fa-graduation-cap"></i> 小组项目</a></li>
                     <li class="dropdown user-menu">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-                            <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
-                            <span class="hidden-xs">[[${user.userName}]]</span>
-                        </a>
-                        <ul class="dropdown-menu">
+
+
+
+                        <style>
+                            /* 下拉按钮样式 */
+                            .dropbtn {
+                                background-color: #4CAF50;
+                                color: white;
+                                padding: 16px;
+                                font-size: 16px;
+                                border: none;
+                                cursor: pointer;
+                            }
+                            /* 容器 <div> - 需要定位下拉内容 */
+                            .dropdown {
+                                position: relative;
+                                display: inline-block;
+                            }
+                            /* 下拉内容 (默认隐藏) */
+                            .dropdown-content {
+                                display: none;
+                                position: absolute;
+                                background-color: #f9f9f9;
+                                min-width: 160px;
+                                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                            }
+                            /* 下拉菜单的链接 */
+                            .dropdown-content a {
+                                color: black;
+                                padding: 12px 16px;
+                                text-decoration: none;
+                                display: block;
+                            }
+                            /* 鼠标移上去后修改下拉菜单链接颜色 */
+                            .dropdown-content a:hover {background-color: #f1f1f1}
+                            /* 在鼠标移上去后显示下拉菜单 */
+                            .dropdown:hover .dropdown-content {
+                                display: block;
+                            }
+                            /* 当下拉内容显示后修改下拉按钮的背景颜色 */
+                            .dropdown:hover .dropbtn {
+                                background-color: #3e8e41;
+                            }
+                        </style>
+
+                        <div class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
+                                <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
+                                <span class="hidden-xs">[[${user.userName}]]</span>
+                            </a>
+                                <div class="dropdown-content">
+                                    <a th:href="@{/system/user/profile}" class="menuItem">
+                                        <i class="fa fa-user"></i> 个人中心</a>
+                                    <a onclick="resetPwd()">
+                                        <i class="fa fa-key"></i> 修改密码</a>
+                                    <a onclick="switchSkin()">
+                                        <i class="fa fa-dashboard"></i> 切换主题</a>
+                                    <a th:href="@{logout}">
+                                        <i class="fa fa-sign-out"></i> 退出登录</a>
+                                </div>
+
+                        </div>
+                        <!--<ul class="dropdown-menu">
                             <li class="mt5">
                                 <a th:href="@{/system/user/profile}" class="menuItem">
                                     <i class="fa fa-user"></i> 个人中心</a>
@@ -120,7 +178,7 @@
                                 <a th:href="@{logout}">
                                     <i class="fa fa-sign-out"></i> 退出登录</a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </li>
                 </ul>
             </nav>

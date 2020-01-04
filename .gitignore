@@ -1,0 +1,14 @@
+# Project exclude paths
+/ruoyi-admin/target/
+/ruoyi-check/target/
+/ruoyi-common/target/
+/ruoyi-framework/target/
+/ruoyi-generator/target/
+/ruoyi-quartz/target/
+/ruoyi-system/target/
+/sx-api/target/
+/sx-broad/target/
+/sx-broadStreamSocket/target/
+/sx-iot/target/
+/sx-rivervis/target/
+/sx-village/target/

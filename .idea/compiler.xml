@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ruoyi-framework" />
+        <module name="sx-rivervis" />
+        <module name="sx-iot" />
+        <module name="sx-api" />
+        <module name="sx-village" />
+        <module name="ruoyi-generator" />
+        <module name="sx-broadStreamSocket" />
+        <module name="ruoyi-quartz" />
+        <module name="ruoyi-common" />
+        <module name="sx-broad" />
+        <module name="ruoyi-system" />
+        <module name="ruoyi-check" />
+        <module name="RongSystem" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RongSystem" target="1.8" />
+      <module name="ruoyi" target="1.8" />
+      <module name="ruoyi-check" target="1.8" />
+      <module name="ruoyi-common" target="1.8" />
+      <module name="ruoyi-framework" target="1.8" />
+      <module name="ruoyi-generator" target="1.8" />
+      <module name="ruoyi-quartz" target="1.8" />
+      <module name="ruoyi-system" target="1.8" />
+      <module name="sx-api" target="1.8" />
+      <module name="sx-broad" target="1.8" />
+      <module name="sx-broadStreamSocket" target="1.8" />
+      <module name="sx-iot" target="1.8" />
+      <module name="sx-rivervis" target="1.8" />
+      <module name="sx-village" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

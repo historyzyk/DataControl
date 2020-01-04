@@ -82,7 +82,8 @@
 		        },
 		        {
 		            field: 'roleId',
-		            title: '角色编号'
+		            title: '角色编号',
+                    sortable: true
 		        },
 		        {
 		            field: 'roleName',
@@ -115,6 +116,7 @@
 		        {
 		            title: '操作',
 		            align: 'center',
+                    sortable: true,
 		            formatter: function(value, row, index) {
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.roleId + '\')"><i class="fa fa-edit"></i>编辑</a> ');

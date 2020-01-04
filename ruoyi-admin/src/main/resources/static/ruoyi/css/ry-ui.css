@@ -446,3 +446,12 @@ label {
 	display: none;
 	color: #ccc;
 }
+/**小图标显示*/
+.navbar-right > .user-menu .user-image {
+	float:left;
+	width:27px;
+	height:27px;
+	border-radius:50%;
+	margin-right:8px;
+	margin-top:-3px;
+}

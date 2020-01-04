@@ -111,7 +111,6 @@
         $("#form-user-add").validate({
         	rules:{
         		loginName:{
-        			required:true,
         			minlength: 2,
         			maxlength: 20,
         			remote: {
@@ -128,19 +127,11 @@
                         }
                     }
         		},
-        		userName:{
-        			required:true,
-        		},
-        		deptName:{
-        			required:true,
-        		},
         		password:{
-        			required:true,
         			minlength: 5,
         			maxlength: 20
         		},
         		email:{
-        			required:true,
                     email:true,
                     remote: {
                         url: ctx + "system/user/checkEmailUnique",
@@ -157,7 +148,6 @@
                     }
         		},
         		phonenumber:{
-        			required:true,
         			isPhone:true,
                     remote: {
                         url: ctx + "system/user/checkPhoneUnique",

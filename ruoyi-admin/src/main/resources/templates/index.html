@@ -39,20 +39,17 @@
             		<div class="user-panel">
             			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}">
             				<div class="hide" th:text="个人中心"></div>
-
 					        <div class="pull-left image">
 		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
 					        </div>
 				        </a>
 				    </div>
             	</li>
-
                 <div class="pull-left info">
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                     <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
-                    <p>[[${user.loginName}]]</p>
                 </div>
-
+                <p>[[${user.loginName}]]</p>
 				<li th:each="menu : ${menus}">
 					<a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
 						<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
@@ -102,7 +99,7 @@
                     <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
-                    <li><a title="小组项目" href="https://github.com/302409013/data" target="_blank"><i class="fa fa-graduation-cap"></i>小组项目</a></li>
+                    <li><a title="小组项目" href="https://github.com/historyzyk/DataControl" target="_blank"><i class="fa fa-graduation-cap"></i>小组项目</a></li>
 
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
@@ -118,9 +115,6 @@
 								<a onclick="resetPwd()">
 								<i class="fa fa-key"></i> 修改密码</a>
 							</li>
-
-
-
 							<li>
 								<a onclick="switchSkin()">
 								<i class="fa fa-dashboard"></i> 切换主题</a>

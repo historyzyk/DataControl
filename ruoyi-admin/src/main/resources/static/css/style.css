@@ -7374,4 +7374,11 @@ body.skin-yellow {
     font-weight: 300;
     overflow: hidden
 }
-
+/**解决重叠问题*/
+.sidebar-collapse .user-panel {
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    overflow: hidden;
+}

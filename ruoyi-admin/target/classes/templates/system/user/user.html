@@ -43,6 +43,9 @@
 								手机号码：<input type="text" name="phonenumber"/>
 							</li>
 							<li>
+								邮箱：<input type="text" name="email"/>
+							</li>
+							<li>
 								用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
 									<option value="">所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -140,12 +143,12 @@
 					},
 					{
 						field: 'email',
-						title: '邮箱',
-						visible: false
+						title: '邮箱'
 					},
 					{
 						field: 'phonenumber',
-						title: '手机'
+						title: '手机',
+						sortable: true
 					},
 					{
 						field: 'phoneimei',

@@ -166,4 +166,19 @@ public interface ISysUserService
     public SysUser selectUserForAppByLoginName(String userName);
 
     public int updateUserHeadImg(SysUser user);
+
+    /**
+     * 校验用户是否允许操作
+     *
+     * @param user 用户信息
+     */
+    public void checkUserAllowed(SysUser user);
+
+    /**
+     * 用户状态修改
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int changeStatus(SysUser user);
 }

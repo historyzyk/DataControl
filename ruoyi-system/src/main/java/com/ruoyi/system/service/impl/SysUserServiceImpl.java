@@ -401,4 +401,29 @@ public class SysUserServiceImpl implements ISysUserService
     {
         return userMapper.updateUserHeadImg(user);
     }
+
+    /**
+     * 校验用户是否允许操作
+     *
+     * @param user 用户信息
+     */
+    public void checkUserAllowed(SysUser user)
+    {
+        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
+        {
+            throw new BusinessException("不允许操作超级管理员用户");
+        }
+    }
+
+    /**
+     * 用户状态修改
+     *
+     * @param user 用户信息
+     * @return 结果
+     */
+    @Override
+    public int changeStatus(SysUser user)
+    {
+        return userMapper.updateUser(user);
+    }
 }

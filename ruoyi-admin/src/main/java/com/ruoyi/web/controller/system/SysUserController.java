@@ -233,4 +233,17 @@ public class SysUserController extends BaseController
     {
         return userService.checkEmailUnique(user);
     }
+
+    /**
+     * 用户状态修改
+     */
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:user:edit")
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysUser user)
+    {
+        userService.checkUserAllowed(user);
+        return toAjax(userService.changeStatus(user));
+    }
 }

@@ -4,82 +4,186 @@
 <title>用户头像修改</title>
 <link th:href="@{/ajax/libs/cropbox/cropbox.css}" rel="stylesheet"/>
 <body class="white-bg">
-    <input name="userId" id="userId" type="hidden"  th:value="${user.userId}" />
-    <div class="container"> 
-        <div class="imageBox"> 
-	        <div class="thumbBox"></div> 
-	        <div class="spinner" style="display: none">Loading...</div> 
-	   </div> 
-	   <div class="action"> 
-	       <div class="new-contentarea tc">
-	           <a href="javascript:void(0)" class="upload-img"> <label for="avatar">上传图像</label> </a> 
-	           <input type="file" class="" name="avatar" id="avatar" accept="image/*"/>
-	       </div> 
-	   <input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切" /> 
-	   <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+" /> 
-	   <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" /> 
-	   </div> 
-	   <div class="cropped"></div> 
-    </div>
+<input name="userId" id="userId" type="hidden"  th:value="${user.userId}" />
+<div class="container">
+	<div class="imageBox">
+		<div class="thumbBox"></div>
+		<div class="spinner" style="display: none">Loading...</div>
+	</div>
+	<div class="action">
+		<div class="new-contentarea tc">
+			<a href="javascript:void(0)" class="upload-img"> <label for="avatar">上传图像</label> </a>
+			<input type="file" class="" name="avatar" id="avatar" accept="image/*"/>
+		</div>
+		<input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切" />
+		<input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+" />
+		<input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" />
+		<input type="button" title="开启摄像头" value="开启摄像头" onclick="getMedia();" /><br />
+		<video height="120px" autoplay="autoplay"></video><hr />
+		<input type="button" title="拍照" value="拍照" onclick="getPhoto();" /><br />
+		<canvas id="canvas1" height="120px" ></canvas><hr />
+		<input type="button" title="视频" value="视频" onclick="getVedio();" /><br />
+		<canvas id="canvas2" height="120px"></canvas>
+	</div>
+	<div class="cropped"></div>
+</div>
 <div th:include="include::footer"></div>
 <script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
 <script type="text/javascript">
-var cropper;
-$(window).load(function() {
-	var avatar = '[[${user.avatar}]]';
-    var options = {
-        thumbBox: '.thumbBox',
-        spinner: '.spinner',
-        imgSrc: $.common.isEmpty(avatar) ? ctx + 'img/profile.jpg' : ctx + 'profile/avatar/' + avatar
-    }
-    cropper = $('.imageBox').cropbox(options);
-    $('#avatar').on('change', function() {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            options.imgSrc = e.target.result;
-            //根据MIME判断上传的文件是不是图片类型
-            if((options.imgSrc).indexOf("image/")==-1){
-                parent.layer.alert("文件格式错误，请上传图片类型,如：JPG,JEPG，PNG后缀的文件。", {icon: 2,title:"系统提示"});
-            } else {
-                cropper = $('.imageBox').cropbox(options);
-            }
-        }
-        reader.readAsDataURL(this.files[0]);
-    })
-    
-	$('#btnCrop').on('click', function(){
-		var img = cropper.getDataURL();
-		$('.cropped').html('');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
-	})
-	
-	$('#btnZoomIn').on('click', function(){
-		cropper.zoomIn();
-	})
-	
-	$('#btnZoomOut').on('click', function(){
-		cropper.zoomOut();
-	})
-});
+	var cropper;
+	$(window).load(function() {
+		var avatar = '[[${user.avatar}]]';
+		var options = {
+			thumbBox: '.thumbBox',
+			spinner: '.spinner',
+			imgSrc: $.common.isEmpty(avatar) ? ctx + 'img/profile.jpg' : ctx + 'profile/avatar/' + avatar
+		}
+		cropper = $('.imageBox').cropbox(options);
+		$('#avatar').on('change', function() {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				options.imgSrc = e.target.result;
+				//根据MIME判断上传的文件是不是图片类型
+				if((options.imgSrc).indexOf("image/")==-1){
+					parent.layer.alert("文件格式错误，请上传图片类型,如：JPG,JEPG，PNG后缀的文件。", {icon: 2,title:"系统提示"});
+				} else {
+					cropper = $('.imageBox').cropbox(options);
+				}
+			}
+			reader.readAsDataURL(this.files[0]);
+		})
 
-function submitHandler() {
-    var img = cropper.getBlob();
-    var formdata = new FormData();
-    formdata.append("avatarfile", img);
-    formdata.append("userId", $("#userId").val());
-    $.ajax({
-        url: ctx + "system/user/profile/updateAvatar",
-        data: formdata,
-        type: "post",
-        processData: false,
-        contentType: false,
-        success: function(result) {
-        	$.operate.saveSuccess(result);
-        }
-    })
-}
+		$('#btnCrop').on('click', function(){
+			var img = cropper.getDataURL();
+			$('.cropped').html('');
+			$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+			$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+			$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+		})
+
+		$('#btnZoomIn').on('click', function(){
+			cropper.zoomIn();
+		})
+
+		$('#btnZoomOut').on('click', function(){
+			cropper.zoomOut();
+		})
+	});
+
+	function submitHandler() {
+		var img = cropper.getBlob();
+		var formdata = new FormData();
+		formdata.append("avatarfile", img);
+		formdata.append("userId", $("#userId").val());
+		$.ajax({
+			url: ctx + "system/user/profile/updateAvatar",
+			data: formdata,
+			type: "post",
+			processData: false,
+			contentType: false,
+			success: function(result) {
+				$.operate.saveSuccess(result);
+			}
+		})
+	}
+
+	var video = document.querySelector('video');
+	var audio, audioType;
+
+	var canvas1 = document.getElementById('canvas1');
+	var context1 = canvas1.getContext('2d');
+
+	var canvas2 = document.getElementById('canvas2');
+	var context2 = canvas2.getContext('2d');
+
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+	window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+	var exArray = []; //存储设备源ID
+	MediaStreamTrack.getSources(function (sourceInfos) {
+		for (var i = 0; i != sourceInfos.length; ++i) {
+			var sourceInfo = sourceInfos[i];
+			//这里会遍历audio,video，所以要加以区分
+			if (sourceInfo.kind === 'video') {
+				exArray.push(sourceInfo.id);
+			}
+		}
+	});
+
+	function getMedia() {
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia({
+				'video': {
+					'optional': [{
+						'sourceId': exArray[1] //0为前置摄像头，1为后置
+					}]
+				},
+				'audio':true
+			}, successFunc, errorFunc);    //success是获取成功的回调函数
+		}
+		else {
+			alert('Native device media streaming (getUserMedia) not supported in this browser.');
+		}
+	}
+
+	function successFunc(stream) {
+		//alert('Succeed to get media!');
+		if (video.mozSrcObject !== undefined) {
+			//Firefox中，video.mozSrcObject最初为null，而不是未定义的，我们可以靠这个来检测Firefox的支持
+			video.mozSrcObject = stream;
+		}
+		else {
+			video.src = window.URL && window.URL.createObjectURL(stream) || stream;
+		}
+
+		//video.play();
+
+		// 音频
+		audio = new Audio();
+		audioType = getAudioType(audio);
+		if (audioType) {
+			audio.src = 'polaroid.' + audioType;
+			audio.play();
+		}
+	}
+	function errorFunc(e) {
+		alert('Error！'+e);
+	}
+
+
+	// 将视频帧绘制到Canvas对象上,Canvas每60ms切换帧，形成肉眼视频效果
+	function drawVideoAtCanvas(video,context) {
+		window.setInterval(function () {
+			context.drawImage(video, 0, 0,200,120);
+		}, 60);
+	}
+
+	//获取音频格式
+	function getAudioType(element) {
+		if (element.canPlayType) {
+			if (element.canPlayType('audio/mp4; codecs="mp4a.40.5"') !== '') {
+				return ('aac');
+			} else if (element.canPlayType('audio/ogg; codecs="vorbis"') !== '') {
+				return ("ogg");
+			}
+		}
+		return false;
+	}
+
+	// vedio播放时触发，绘制vedio帧图像到canvas
+	//        video.addEventListener('play', function () {
+	//            drawVideoAtCanvas(video, context2);
+	//        }, false);
+
+	//拍照
+	function getPhoto() {
+		context1.drawImage(video, 0, 0,200,120); //将video对象内指定的区域捕捉绘制到画布上指定的区域，实现拍照。
+	}
+
+	//视频
+	function getVedio() {
+		drawVideoAtCanvas(video, context2);
+	}
 </script>
 </body>
 </html>

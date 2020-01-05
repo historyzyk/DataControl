@@ -7,6 +7,7 @@
 		_tree: {},
 		btTable: {},
 		bttTable: {},
+		rowIds: [],
 		// 表格封装处理
 		table: {
 			_option: {},
@@ -148,6 +149,9 @@
 				$.btTable.on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
 					// 复选框分页保留保存选中数组
 					var rowIds = $.table.affectedRowIds(rows);
+					console.info(rowIds)
+					$.rowIds.push(Number(rowIds)) ;
+					console.info($.rowIds)
 					if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
 						func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
 						selectionIds = _[func](selectionIds, rowIds);
@@ -266,10 +270,23 @@
 			},
 			// 导出数据
 			exportExcel: function(formId) {
-				$.modal.confirm("确定导出所有" + $.table._option.modalName + "吗？", function() {
-					var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+				debugger
+				var params = $.rowIds;
+				console.info(params)
+				if (params.length == 0) {
+					$.modal.alertWarning("请选择要导出的数据!");
+					return;
+				}
+
+				var data={"ids": JSON.stringify(params.toString())};
+				console.info(data)
+				$.modal.confirm("确定导出选中数据吗？", function() {
+					/*var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+					console.info(currentId)
+					console.info( $("#" + currentId).serializeArray())*/
+					//$("#" + currentId).serializeArray()
 					$.modal.loading("正在导出数据，请稍后...");
-					$.post($.table._option.exportUrl, $("#" + currentId).serializeArray(), function(result) {
+					$.post($.table._option.exportUrl, data, function(result) {
 						if (result.code == web_status.SUCCESS) {
 							window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
 						} else if (result.code == web_status.WARNING) {
@@ -365,6 +382,7 @@
 			affectedRowIds: function(rows) {
 				var column = $.common.isEmpty($.table._option.uniqueId) ? $.table._option.columns[1].field : $.table._option.uniqueId;
 				var rowIds;
+				debugger
 				if ($.isArray(rows)) {
 					rowIds = $.map(rows, function(row) {
 						return row[column];

@@ -140,6 +140,26 @@
 		    };
 		    $.table.init(options);
 		});
+
+		function searchPre() {
+
+			var data = {};
+
+			data.businessTypes = $.common.join($('#businessTypes').selectpicker('val'));
+
+			$.table.search('operlog-form', 'bootstrap-table', data);
+
+		}
+
+
+
+		function resetPre() {
+
+			$.form.reset();
+
+			$("#businessTypes").selectpicker('refresh');
+
+		}
 	</script>
 </body>
 </html>

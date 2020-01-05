@@ -1,11 +1,14 @@
 package com.ruoyi.web.controller.system;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ruoyi.broad.domain.Broaduser;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.village.domain.Villagefamily;
+import com.ruoyi.village.domain.VillagerInfo;
 import com.ruoyi.village.domain.Villageuser;
 import com.ruoyi.village.service.IWuserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,11 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
@@ -32,6 +31,7 @@ import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.broad.service.IBroaduserService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 用户信息
@@ -84,13 +84,59 @@ public class SysUserController extends BaseController
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysUser user)
+    public AjaxResult export(@RequestParam(value = "ids",required=false) List<String> ids)
     {
-        List<SysUser> list = userService.selectUserList(user);
-        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
-        return util.exportExcel(list, "user");
-    }
+        List<SysUser> users = new ArrayList<SysUser>();
+        for (String id  : ids) {
+            System.out.println(id);
+            String a = id.replace("\"","");
+            System.out.println(a);
+            SysUser user = userService.selectUserById(Long.parseLong(a));
+            users.add(user);
+        }
 
+   //     List<SysUser> list = userService.selectUserList(user);
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        return util.exportExcel(users, "user");
+    }
+    /**
+     * 导入数据
+     */
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        List<SysUser> userList = util.importExcel(file.getInputStream());
+        String message = importUser(userList, updateSupport);
+        return AjaxResult.success(message);
+
+    }
+    public String importUser(List<SysUser> userList, Boolean isUpdateSupport)
+    {
+        if (StringUtils.isNull(userList) || userList.size() == 0)
+        {
+            throw new BusinessException("导入用户数据不能为空！");
+        }
+        int successNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        /*通过读取表格内容获得userlist，再通过遍历userlist去将每一行数据插入数据库中*/
+        for (SysUser user : userList)
+        {
+            try{
+                userService.insertUser(user);
+                successNum++;
+                successMsg.append("<br/>" + successNum + "用户 " + user.getAname() + " 导入成功");
+            }
+            catch (Exception e)
+            {
+                String msg = user.getAname() + " 导入失败：";
+                failureMsg.append(msg + e.getMessage());
+            }
+        }
+        return successMsg.toString();
+    }
     /**
      * 新增用户
      */

@@ -84,7 +84,7 @@
             }
             // 是否显示列选项
             if (options.showColumns) {
-                var $columns_div = $('<div class="btn-group pull-right" title="列"><button type="button" aria-label="columns" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="glyphicon glyphicon-list"></i> <span class="caret"></span></button></div>');
+                var $columns_div = $('<div class="btn-group pull-right" title="列"><button type="button" aria-label="columns" class="" data-toggle="dropdown" aria-expanded="false"><i class="glyphicon glyphicon-list"></i> <span class="caret"></span></button></div>');
                 var $columns_ul = $('<ul class="dropdown-menu columns" role="menu"></ul>');
                 $.each(options.columns, function(i, column) {
                     if (column.field != 'selectItem') {

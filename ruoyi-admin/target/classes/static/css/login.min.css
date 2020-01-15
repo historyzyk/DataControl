@@ -13,15 +13,22 @@ html {
     transform: translate(-50%,-95%);
 }
 
-/*星空背景渐变色调*/
 .signin {
-
-    background: radial-gradient(200% 100% at bottom center, #0070aa, #0b2570, #000035, #000);
-    /*background: radial-gradient(220% 105% at top center, #000 10%, #000035 40%, #0b2570 65%, #0070aa);*/
-    background: radial-gradient(220% 105% at top center, #000b86 10%, #00008b 40%, #0083cb 65%, #ff0000);
-    background-attachment: fixed;
+    /*background: #ffffff url(../img/hunau2.jpg) center center no-repeat;*/
+    background-size: cover;
+    /*background: radial-gradient(200% 100% at bottom center, #0070aa, #0b2570, #000035, #000);*/
+    /*/*background: radial-gradient(220% 105% at top center, #000 10%, #000035 40%, #0b2570 65%, #0070aa);*/*/
+    /*background: radial-gradient(220% 105% at top center, #000b86 10%, #00008b 40%, #0083cb 65%, #ff0000);*/
+    /*background-attachment: fixed;*/
     overflow: hidden;
-    color: rgba(255, 255, 255, .95)
+    /*color: rgba(255, 255, 255, .95)*/
+}
+.xjw{
+    height: 1080px;
+    width: 1920px;
+    background-size: cover ;
+    center center no-repeat;
+    overflow: hidden;
 }
 
 .signinpanel {

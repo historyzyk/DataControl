@@ -7350,3 +7350,232 @@ body.skin-yellow {
     border-color: #cccccc!important;
 }
 
+.sidebar-collapse .user-panel .image>img {
+
+
+
+    width: 100%;
+
+
+
+    max-width: 45px;
+
+
+
+    height: auto;
+
+
+
+}
+
+
+
+/*ruoyi标签格式*/
+
+
+
+.nav .logo {
+
+
+
+    background-color: #367fa9;
+
+
+
+    color: #fff;
+
+
+
+    border-bottom: 0 solid transparent;
+
+
+
+    -webkit-transition: width .3s ease-in-out;
+
+
+
+    -o-transition: width .3s ease-in-out;
+
+
+
+    transition: width .3s ease-in-out;
+
+
+
+    display: block;
+
+
+
+    height: 50px;
+
+
+
+    font-size: 20px;
+
+
+
+    line-height: 50px;
+
+
+
+    text-align: center;
+
+
+
+    width: 200px;
+
+
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+
+    padding: 0 15px;
+
+
+
+    font-weight: 300;
+
+
+
+    overflow: hidden
+
+
+
+}
+/*设置图标大小*/
+
+
+
+.sidebar-collapse .user-panel .image>img {
+
+
+
+    width: 100%;
+
+
+
+    max-width: 45px;
+
+
+
+    height: auto;
+
+
+
+}
+
+
+
+/*ruoyi标签格式*/
+
+
+
+.nav .logo {
+
+
+
+    background-color: #367fa9;
+
+
+
+    color: #fff;
+
+
+
+    border-bottom: 0 solid transparent;
+
+
+
+    -webkit-transition: width .3s ease-in-out;
+
+
+
+    -o-transition: width .3s ease-in-out;
+
+
+
+    transition: width .3s ease-in-out;
+
+
+
+    display: block;
+
+
+
+    height: 50px;
+
+
+
+    font-size: 20px;
+
+
+
+    line-height: 50px;
+
+
+
+    text-align: center;
+
+
+
+    width: 200px;
+
+
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+
+    padding: 0 15px;
+
+
+
+    font-weight: 300;
+
+
+
+    overflow: hidden
+
+
+
+}
+
+
+
+/**解决重叠问题*/
+
+
+
+
+.sidebar-collapse .user-panel {
+
+
+
+
+    white-space: nowrap;
+
+
+
+
+    position: relative;
+
+
+
+
+    width: 100%;
+
+
+
+
+    padding: 15px;
+
+
+
+
+    overflow: hidden;
+
+
+
+
+}

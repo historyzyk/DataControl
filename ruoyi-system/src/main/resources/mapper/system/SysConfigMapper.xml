@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"      column="update_by"      />
         <result property="updateTime"    column="update_time"    />
+        <result property="remark"        column="remark"/>
     </resultMap>
     
     <sql id="selectConfigVo">
@@ -56,6 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
 				and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
+            <if test="remark != null and remark != ''">
+                and remark like concat('%', #{remark}, '%')
+            </if>
 		</where>
     </select>
     

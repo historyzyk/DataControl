@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>若依系统首页</title>   <!--网页标题-->
+    <title>若依系统首页</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -28,58 +28,55 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <a th:href="@{/index}">
-                  <li class="logo">
-				    <span class="logo-lg"  >RuoYi</span>
-                      <style>
-                          body{ text-align:center}
-                      </style>
-                  </li>
-            	</a>
-            	<li>
-            		<div class="user-panel">
-            			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}">
-            				<div class="hide" th:text="个人中心"></div>
-					        <div class="pull-left image">
-		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
-					        </div>
-				        </a>
-				    </div>
-            	</li>
-                <div class="pull-left info">
-                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
-                    <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
-                </div>
-                <p>[[${user.loginName}]]</p>
-				<li th:each="menu : ${menus}">
-					<a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
-						<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
-						<span class="nav-label" th:text="${menu.menuName}">一级菜单</span>
-						<span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
-					</a>
-					<ul class="nav nav-second-level collapse">
-						<li th:each="cmenu : ${menu.children}">
-							<a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
-							<a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
-							<ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
-								<li th:each="emenu : ${cmenu.children}">
-									<a th:if="${#lists.isEmpty(emenu.children)}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
-									<a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
-									<ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-fourth-level">
-										<li th:each="fmenu : ${emenu.children}">
-											<a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}"  th:text="${fmenu.menuName}" th:href="@{${fmenu.url}}">四级菜单</a>
-											<a th:if="${not #lists.isEmpty(fmenu.children)}" href="#">[[${fmenu.menuName}]]<span class="fa arrow"></span></a>
-											<ul th:if="${not #lists.isEmpty(fmenu.children)}" class="nav nav-fifth-level">
-												<li th:each="smenu : ${fmenu.children}">
-													<a th:if="${#lists.isEmpty(smenu.children)}" th:class="${smenu.target == ''} ? |menuItem| : ${smenu.target}" th:text="${smenu.menuName}" th:href="@{${smenu.url}}" style="font-style: italic">五级菜单</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+                    <li class="logo">
+                        <span class="logo-lg" >RuoYi</span>
+                    </li>
+                </a>
+                <li>
+                    <div class="user-panel">
+                        <a class="menuItem" title="个人中心" th:href="@{/system/user/profile}">
+                            <div class="hide" th:text="个人中心"></div>
+                            <div class="pull-left image">
+                                <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
+                            </div>
+                        </a>
+                        <div class="pull-left info">
+                            <p>[[${user.loginName}]]</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                            <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
+                        </div>
+                    </div>
+                </li>
+                <li th:each="menu : ${menus}">
+                    <a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
+                        <i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
+                        <span class="nav-label" th:text="${menu.menuName}">一级菜单</span>
+                        <span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:each="cmenu : ${menu.children}">
+                            <a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
+                            <a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
+                            <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
+                                <li th:each="emenu : ${cmenu.children}">
+                                    <a th:if="${#lists.isEmpty(emenu.children)}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
+                                    <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
+                                    <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-fourth-level">
+                                        <li th:each="fmenu : ${emenu.children}">
+                                            <a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}"  th:text="${fmenu.menuName}" th:href="@{${fmenu.url}}">四级菜单</a>
+                                            <a th:if="${not #lists.isEmpty(fmenu.children)}" href="#">[[${fmenu.menuName}]]<span class="fa arrow"></span></a>
+                                            <ul th:if="${not #lists.isEmpty(fmenu.children)}" class="nav nav-fifth-level">
+                                                <li th:each="smenu : ${fmenu.children}">
+                                                    <a th:if="${#lists.isEmpty(smenu.children)}" th:class="${smenu.target == ''} ? |menuItem| : ${smenu.target}" th:text="${smenu.menuName}" th:href="@{${smenu.url}}" style="font-style: italic">五级菜单</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -88,45 +85,98 @@
 
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
+        <div class="row border-bottom" style="color: #191970">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
-                    	<i class="fa fa-bars"></i>
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#87cefa;" href="#" title="收起菜单">
+                        <i class="fa fa-bars"></i>
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
-	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
-                    <li><a title="小组项目" href="https://github.com/historyzyk/DataControl" target="_blank"><i class="fa fa-graduation-cap"></i>小组项目</a></li>
-
+                    <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                    <li><a title="小组项目" href="https://github.com/historyzyk/DataControl" target="_blank"><i class="fa fa-graduation-cap"></i> 小组项目</a></li>
                     <li class="dropdown user-menu">
-						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
-							<span class="hidden-xs">[[${user.userName}]]</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="mt5">
-								<a th:href="@{/system/user/profile}" class="menuItem">
-								<i class="fa fa-user"></i> 个人中心</a>
-							</li>
-							<li>
-								<a onclick="resetPwd()">
-								<i class="fa fa-key"></i> 修改密码</a>
-							</li>
-							<li>
-								<a onclick="switchSkin()">
-								<i class="fa fa-dashboard"></i> 切换主题</a>
-							</li>
+                        <style>
+                            /* 下拉按钮样式 */
+                            .dropbtn {
+                                background-color: #4CAF50;
+                                color: white;
+                                padding: 16px;
+                                font-size: 16px;
+                                border: none;
+                                cursor: pointer;
+                            }
+                            /* 容器 <div> - 需要定位下拉内容 */
+                            .dropdown {
+                                position: relative;
+                                display: inline-block;
+                            }
+                            /* 下拉内容 (默认隐藏) */
+                            .dropdown-content {
+                                display: none;
+                                position: absolute;
+                                background-color: #f9f9f9;
+                                min-width: 160px;
+                                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                            }
+                            /* 下拉菜单的链接 */
+                            .dropdown-content a {
+                                color: black;
+                                padding: 12px 16px;
+                                text-decoration: none;
+                                display: block;
+                            }
+                            /* 鼠标移上去后修改下拉菜单链接颜色 */
+                            .dropdown-content a:hover {background-color: #f1f1f1}
+                            /* 在鼠标移上去后显示下拉菜单 */
+                            .dropdown:hover .dropdown-content {
+                                display: block;
+                            }
+                            /* 当下拉内容显示后修改下拉按钮的背景颜色 */
+                            .dropdown:hover .dropbtn {
+                                background-color: #3e8e41;
+                            }
+                        </style>
 
+                        <div class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
+                                <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
+                                <span class="hidden-xs">[[${user.userName}]]</span>
+                            </a>
+                                <div class="dropdown-content">
+                                    <a th:href="@{/system/user/profile}" class="menuItem">
+                                        <i class="fa fa-user"></i> 个人中心</a>
+                                    <a href="javascript:resetPwd()">
+                                        <i class="fa fa-key"></i> 修改密码</a>
+                                    <a onclick="switchSkin()">
+                                        <i class="fa fa-dashboard"></i> 切换主题</a>
+                                    <a th:href="@{logout}">
+                                        <i class="fa fa-sign-out"></i> 退出登录</a>
+                                </div>
+
+                        </div>
+                        <!--<ul class="dropdown-menu">
+                            <li class="mt5">
+                                <a th:href="@{/system/user/profile}" class="menuItem">
+                                    <i class="fa fa-user"></i> 个人中心</a>
+                            </li>
+                            <li>
+                                <a onclick="resetPwd()">
+                                    <i class="fa fa-key"></i> 修改密码</a>
+                            </li>
+                            <li>
+                                <a onclick="switchSkin()">
+                                    <i class="fa fa-dashboard"></i> 切换主题</a>
+                            </li>
                             <li class="divider"></li>
                             <li>
-								<a th:href="@{logout}">
-								<i class="fa fa-sign-out"></i> 退出登录</a>
-							</li>
-						</ul>
-					</li>
+                                <a th:href="@{logout}">
+                                    <i class="fa fa-sign-out"></i> 退出登录</a>
+                            </li>
+                        </ul>-->
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -145,7 +195,7 @@
             <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
 
-        <!--<a id="ax_close_max" class="ax_close_max" href="#"><i title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>-->
+        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
 
         <div class="row mainContent" id="content-main">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
@@ -170,65 +220,65 @@
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:inline="javascript">
-var ctx = [[@{/}]];
+    var ctx = [[@{/}]];
 // 皮肤缓存
-var skin = storage.get("skin");
+        var skin = storage.get("skin");
 // history（表示去掉地址的#）否则地址以"#"形式展示
-var mode = "history";
+        var mode = "history";
 // 历史访问路径缓存
-var historyPath = storage.get("historyPath");
+        var historyPath = storage.get("historyPath");
 // 排除非左侧菜单链接
-var excludesUrl = ["/system/user/profile"];
+        var excludesUrl = ["/system/user/profile"];
 
 // 本地主题优先，未设置取系统配置
-if($.common.isNotEmpty(skin)){
-	$("body").addClass(skin.split('|')[0]);
-	$("body").addClass(skin.split('|')[1]);
-} else {
-	var sideTheme = [[${@config.getKey('sys.index.sideTheme')}]];
-	var skinName = [[${@config.getKey('sys.index.skinName')}]];
-	$("body").addClass(sideTheme);
-	$("body").addClass(skinName);
-}
+        if($.common.isNotEmpty(skin)){
+            $("body").addClass(skin.split('|')[0]);
+            $("body").addClass(skin.split('|')[1]);
+        } else {
+            var sideTheme = [[${@config.getKey('sys.index.sideTheme')}]];
+            var skinName = [[${@config.getKey('sys.index.skinName')}]];
+            $("body").addClass(sideTheme);
+            $("body").addClass(skinName);
+        }
 
-/* 用户管理-重置密码 */
-function resetPwd() {
-    var url = ctx + 'system/user/profile/resetPwd';
-    $.modal.open("重置密码", url, '770', '380');
-}
-/* 切换主题 */
-function switchSkin() {
-    layer.open({
-		type : 2,
-		shadeClose : true,
-		title : "切换主题",
-		area : ["530px", "386px"],
-		content : [ctx + "system/switchSkin", 'no']
-	})
-}
+        /* 用户管理-重置密码 */
+        function resetPwd() {
+            var url = ctx + 'system/user/profile/resetPwd';
+            $.modal.open("重置密码", url, '770', '380');
+        }
+        /* 切换主题 */
+        function switchSkin() {
+            layer.open({
+                type : 2,
+                shadeClose : true,
+                title : "切换主题",
+                area : ["530px", "386px"],
+                content : [ctx + "system/user/switchSkin"]
+            })
+        }
 
-/** 刷新时访问路径页签 */
-function applyPath(url) {
-	$('a[href$="' + decodeURI(url) + '"]').click();
-    if($.inArray(url, excludesUrl)){
-        $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
-    }
-}
+        /** 刷新时访问路径页签 */
+        function applyPath(url) {
+            $('a[href$="' + decodeURI(url) + '"]').click();
+            if($.inArray(url, excludesUrl)){
+                $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+            }
+        }
 
-$(function() {
-	if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
-		var url = storage.get('publicPath');
-	    if ($.common.isNotEmpty(url)) {
-	    	applyPath(url);
-	    }
-	} else {
-		var hash = location.hash;
-	    if ($.common.isNotEmpty(hash)) {
-	        var url = hash.substring(1, hash.length);
-	        applyPath(url);
-	    }
-	}
-});
+        $(function() {
+            if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
+                var url = storage.get('publicPath');
+                if ($.common.isNotEmpty(url)) {
+                    applyPath(url);
+                }
+            } else {
+                var hash = location.hash;
+                if ($.common.isNotEmpty(hash)) {
+                    var url = hash.substring(1, hash.length);
+                    applyPath(url);
+                }
+            }
+        });
 </script>
 </body>
 </html>

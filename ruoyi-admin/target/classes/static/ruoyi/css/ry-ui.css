@@ -994,3 +994,24 @@ label {
 	border-radius: 6px;
 	background-color: #999;
 }
+
+/**小图标显示*/
+
+
+
+
+.navbar-right > .user-menu .user-image {
+
+	float:left;
+
+	width:27px;
+
+	height:27px;
+
+	border-radius:50%;
+
+	margin-right:8px;
+
+	margin-top:-3px;
+
+}

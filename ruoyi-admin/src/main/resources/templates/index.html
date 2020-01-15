@@ -85,10 +85,10 @@
 
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
+        <div class="row border-bottom" style="color: #191970">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#87cefa;" href="#" title="收起菜单">
                         <i class="fa fa-bars"></i>
                     </a>
                 </div>
@@ -98,9 +98,6 @@
                     <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li><a title="小组项目" href="https://github.com/historyzyk/DataControl" target="_blank"><i class="fa fa-graduation-cap"></i> 小组项目</a></li>
                     <li class="dropdown user-menu">
-
-
-
                         <style>
                             /* 下拉按钮样式 */
                             .dropbtn {
@@ -151,7 +148,7 @@
                                 <div class="dropdown-content">
                                     <a th:href="@{/system/user/profile}" class="menuItem">
                                         <i class="fa fa-user"></i> 个人中心</a>
-                                    <a onclick="resetPwd()">
+                                    <a href="javascript:resetPwd()">
                                         <i class="fa fa-key"></i> 修改密码</a>
                                     <a onclick="switchSkin()">
                                         <i class="fa fa-dashboard"></i> 切换主题</a>
@@ -256,7 +253,7 @@
                 shadeClose : true,
                 title : "切换主题",
                 area : ["530px", "386px"],
-                content : [ctx + "system/switchSkin", 'no']
+                content : [ctx + "system/user/switchSkin"]
             })
         }
 
